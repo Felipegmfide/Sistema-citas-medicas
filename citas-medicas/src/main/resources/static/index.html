@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistema de Citas Médicas - Pruebas Oracle</title>
+<style>body{font-family:Arial,sans-serif;background:#f5f7fb;color:#1d2939;margin:0;padding:32px}main{max-width:780px;margin:auto}section{background:white;border:1px solid #ddd;border-radius:12px;padding:20px;margin:14px 0}button{background:#1769aa;color:white;border:0;border-radius:7px;padding:10px 15px;cursor:pointer}input{padding:9px;border:1px solid #bbb;border-radius:6px;width:70px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef2f7;padding:12px;border-radius:7px}small{color:#667085}</style></head>
+<body><main><h1>Sistema de Citas Médicas</h1><p>Panel de pruebas de conexión con Oracle</p>
+<section><h2>1. Conexión</h2><button onclick="probar('/api/conexion','conexion')">Probar conexión</button><pre id="conexion">Sin ejecutar</pre></section>
+<section><h2>2. Tablas de Oracle</h2><button onclick="probar('/api/tablas','tablas')">Consultar tablas</button><pre id="tablas">Sin ejecutar</pre></section>
+<section><h2>3. Citas por paciente</h2><label>ID paciente <input type="number" id="paciente" value="1" min="1"></label> <button onclick="probar('/api/pacientes/'+document.getElementById('paciente').value+'/total-citas','pacienteResultado')">Consultar función</button><pre id="pacienteResultado">Sin ejecutar</pre></section>
+<section><h2>4. Citas por médico</h2><label>ID médico <input type="number" id="medico" value="1" min="1"></label> <button onclick="probar('/api/medicos/'+document.getElementById('medico').value+'/total-citas','medicoResultado')">Consultar función</button><pre id="medicoResultado">Sin ejecutar</pre></section>
+<small>Panel de diagnóstico académico: no modifica registros. No utilizar como interfaz pública sin autenticación.</small>
+</main><script>async function probar(url,id){let el=document.getElementById(id);el.textContent='Consultando...';try{let r=await fetch(url);let data=await r.json();el.textContent=JSON.stringify({codigoHTTP:r.status,...data},null,2)}catch(e){el.textContent='No se pudo contactar a la aplicación Java: '+e.message}}</script></body></html>
